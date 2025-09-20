@@ -575,6 +575,9 @@ button.innerHTML = "Change banner"
 footer.insertBefore(button, footer.firstChild);
 button.onclick = changeBanner;
 
+// Custom favicon
+$("#dynamic-favicon").attr("href", "https://files.catbox.moe/jgh9sr.png");
+
 e=campaignTrail_temp
 
 var changeGameDisp = (hide) => {
