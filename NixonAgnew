@@ -1,3 +1,12 @@
+const style_overwrite = document.createElement("style");
+style_overwrite.innerHTML = 
+`#campaign_sign {
+  background-color: #402527;
+  border-color: #2e1e20;
+}`
+;
+document.head.appendChild(style_overwrite);
+
 campaignTrail_temp.questions_json = [
     {
         "model": "campaign_trail.question",
