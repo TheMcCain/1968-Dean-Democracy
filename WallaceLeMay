@@ -7780,8 +7780,8 @@ campaignTrail_temp.answer_feedback_json = [
     }
 ]
 
-campaignTrail_temp.candidate_image_url = "https://i.imgur.com/n2k9Vce.png";
-campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/7loknR9.png";
+campaignTrail_temp.candidate_image_url = "https://i.imgur.com/LopVVuR.png";
+campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/nveV6m1.png";
 campaignTrail_temp.candidate_last_name = "Wallace";
 campaignTrail_temp.running_mate_last_name = "LeMay";
 
