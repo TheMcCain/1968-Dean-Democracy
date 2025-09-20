@@ -640,3 +640,736 @@ e.creditsPage = () => {
 
 e.credits = "<button onclick='e.creditsPage()'>The Dean Democracy Team</button>"
 
+// A viynl turntable-like player
+// based off an alt player made for Moonbeam '92
+class Song {
+    constructor(title, artist, coverLink, audioLink) {
+        this.title = title;
+        this.artist = artist;
+        this.coverLink = coverLink;
+        this.audioLink = audioLink;
+    }
+}
+
+class Playlist {
+    constructor(songs = []) {
+        this.songs = songs;
+        this.currentSongIndex = 0;
+    }
+
+    addSong(song) {
+        this.songs.push(song);
+    }
+
+    getCurrentSong() {
+        if (this.songs.length === 0) {
+            return new Song("No Records Loaded", "Please add a record", "https://itsastronomical.com/assets/music/buttons.png", "");
+        }
+        return this.songs[this.currentSongIndex];
+    }
+
+    playNext() {
+        if (this.songs.length === 0) return;
+        this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length;
+    }
+}
+
+const VinylPlayer = {
+    playlist: null,
+    audio: null,
+    isPlaying: false,
+    dom: {},
+
+    init(targetSelector, initialPlaylist) {
+        const targetElement = document.querySelector(targetSelector);
+        if (!targetElement) {
+            console.error("Turntable: target element not found.", targetSelector);
+            return;
+        }
+
+        this._createPlayerHTML(targetElement);
+        this._injectCSS();
+        this._cacheDOMElements();
+
+        this.audio = new Audio();
+        document.body.appendChild(this.audio);
+
+        this._bindEvents();
+        this._setVolume(this.dom.volumeKnob.value);
+        this._updateKnobRotation(this.dom.volumeKnob.value);
+        this.loadPlaylist(initialPlaylist);
+    },
+
+    loadPlaylist(newPlaylist) {
+        this.playlist = newPlaylist;
+        this.playlist.currentSongIndex = 0;
+        this._playSongAtIndex(0, false); 
+    },
+
+    _createPlayerHTML(targetElement) {
+        const playerHTML = `
+            <div class="vinyl-player">
+                <div class="vinyl-player__case">
+                    <div class="vinyl-player__top-panel">
+                        <div class="vinyl-player__brand">
+                            <span class="vinyl-player__brand-name">GARRARD</span>
+                            <span class="vinyl-player__model">MODEL 401</span>
+                        </div>
+                        <div class="vinyl-player__speed-selector">
+                            <label class="vinyl-player__speed-label">SPEED</label>
+                            <div class="vinyl-player__rpm-switches">
+                                <button class="vinyl-player__rpm-btn vinyl-player__rpm-btn--active">33⅓</button>
+                                <button class="vinyl-player__rpm-btn">45</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vinyl-player__turntable-area">
+                        <div class="vinyl-player__platter">
+                            <div class="vinyl-player__record">
+                                <img src="" alt="Album Cover" class="vinyl-player__album-label">
+                                <div class="vinyl-player__spindle"></div>
+                                <div class="vinyl-player__grooves"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="vinyl-player__tonearm-assembly">
+                            <div class="vinyl-player__tonearm-base"></div>
+                            <div class="vinyl-player__tonearm">
+                                <div class="vinyl-player__headshell"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vinyl-player__control-panel">
+                        <div class="vinyl-player__info-display">
+                            <div class="vinyl-player__now-playing">NOW PLAYING</div>
+                            <div class="vinyl-player__track-info">
+                                <div class="vinyl-player__song-title"></div>
+                                <div class="vinyl-player__song-artist"></div>
+                            </div>
+                            <div class="vinyl-player__progress-track">
+                                <div class="progress-groove">
+                                    <progress class="progress-groove--display" value="0" max="100"></progress>
+                                    <input type="range" class="progress-groove--interactive" value="0" min="0" max="100" step="0.1">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="vinyl-player__controls">
+                            <button class="vinyl-player__control-btn vinyl-player__control-btn--play" title="Start/Stop">
+                                <span class="btn-label">START</span>
+                                <div class="btn-indicator"></div>
+                            </button>
+                            <button class="vinyl-player__control-btn vinyl-player__control-btn--cue" title="Cue">
+                                <span class="btn-label">CUE</span>
+                                <div class="btn-indicator"></div>
+                            </button>
+                            <button class="vinyl-player__control-btn vinyl-player__control-btn--next" title="Next Record">
+                                <span class="btn-label">NEXT</span>
+                                <div class="btn-indicator"></div>
+                            </button>
+                        </div>
+                        
+                        <div class="vinyl-player__volume-control">
+                            <label class="vinyl-player__volume-label">VOLUME</label>
+                            <div class="vinyl-player__knob-wrapper">
+                                <div class="vinyl-player__knob-container">
+                                    <div class="vinyl-player__knob">
+                                        <div class="vinyl-player__knob-indicator"></div>
+                                        <div class="vinyl-player__knob-center"></div>
+                                    </div>
+                                    <input type="range" class="vinyl-player__volume-slider" min="0" max="10" step="1" value="5">
+                                </div>
+                                <div class="vinyl-player__knob-scale">
+                                    <span class="scale-mark" data-value="0">0</span>
+                                    <span class="scale-mark" data-value="2">2</span>
+                                    <span class="scale-mark" data-value="4">4</span>
+                                    <span class="scale-mark" data-value="6">6</span>
+                                    <span class="scale-mark" data-value="8">8</span>
+                                    <span class="scale-mark" data-value="10">10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        targetElement.insertAdjacentHTML('afterend', playerHTML);
+    },
+
+    _cacheDOMElements() {
+        const player = document.querySelector('.vinyl-player');
+        this.dom = {
+            player,
+            albumLabel: player.querySelector('.vinyl-player__album-label'),
+            record: player.querySelector('.vinyl-player__record'),
+            tonearm: player.querySelector('.vinyl-player__tonearm'),
+            songTitle: player.querySelector('.vinyl-player__song-title'),
+            songArtist: player.querySelector('.vinyl-player__song-artist'),
+            playBtn: player.querySelector('.vinyl-player__control-btn--play'),
+            cueBtn: player.querySelector('.vinyl-player__control-btn--cue'),
+            nextBtn: player.querySelector('.vinyl-player__control-btn--next'),
+            progressDisplay: player.querySelector('.progress-groove--display'),
+            progressInteractive: player.querySelector('.progress-groove--interactive'),
+            volumeKnob: player.querySelector('.vinyl-player__volume-slider'),
+            knobVisual: player.querySelector('.vinyl-player__knob'),
+        };
+    },
+
+    _bindEvents() {
+        this.dom.playBtn.addEventListener('click', () => this.togglePlay());
+        this.dom.cueBtn.addEventListener('click', () => this.stop());
+        this.dom.nextBtn.addEventListener('click', () => this.playNext());
+        
+        this.audio.addEventListener('timeupdate', () => this._updateProgress());
+        this.audio.addEventListener('loadedmetadata', () => this._updateProgress());
+        this.audio.addEventListener('ended', () => this.playNext());
+
+        this.dom.progressInteractive.addEventListener('input', (e) => this._seek(e));
+        this.dom.volumeKnob.addEventListener('input', (e) => {
+            this._setVolume(e.target.value);
+            this._updateKnobRotation(e.target.value);
+        });
+    },
+
+    _updateKnobRotation(value) {
+        // map value (0-10) to rotation (-135 to +135 degrees)
+        const rotation = (value / 10) * 270 - 135;
+        this.dom.knobVisual.style.transform = `rotate(${rotation}deg)`;
+    },
+
+    _playSongAtIndex(index, autoplay = false) {
+        this.playlist.currentSongIndex = index;
+        const song = this.playlist.getCurrentSong();
+        this.audio.src = song.audioLink;
+        this._updateUI();
+
+        if (autoplay) {
+            this.isPlaying = true;
+            this.audio.play().catch(e => {
+                this.isPlaying = false;
+                console.warn("Autoplay was blocked.");
+                this._updatePlayState();
+            });
+        }
+        this._updatePlayState();
+    },
+
+    _setVolume(value) {
+        this.audio.volume = value / 10;
+    },
+
+    _updateUI() {
+        const song = this.playlist.getCurrentSong();
+        this.dom.albumLabel.src = song.coverLink;
+        this.dom.songTitle.textContent = song.title;
+        this.dom.songArtist.textContent = "by " + song.artist;
+    },
+
+    togglePlay() {
+        if (!this.playlist || this.playlist.songs.length === 0) return;
+        this.isPlaying = !this.isPlaying;
+        if (this.isPlaying) {
+            this.audio.play();
+        } else {
+            this.audio.pause();
+        }
+        this._updatePlayState();
+    },
+
+    stop() {
+        this.audio.pause();
+        this.audio.currentTime = 0;
+        this.isPlaying = false;
+        this._updatePlayState();
+    },
+
+    playNext() {
+        if (!this.playlist || this.playlist.songs.length === 0) return;
+        this.playlist.playNext();
+        this._playSongAtIndex(this.playlist.currentSongIndex, this.isPlaying || this.audio.paused);
+    },
+
+    _updatePlayState() {
+        if (this.isPlaying) {
+            this.dom.playBtn.classList.add('is-active');
+            this.dom.record.classList.add('is-spinning');
+            this.dom.tonearm.classList.add('is-playing');
+        } else {
+            this.dom.playBtn.classList.remove('is-active');
+            this.dom.record.classList.remove('is-spinning');
+            this.dom.tonearm.classList.remove('is-playing');
+        }
+    },
+
+    _updateProgress() {
+        const progressPercent = (this.audio.currentTime / this.audio.duration) * 100;
+        const safePercent = isNaN(progressPercent) ? 0 : progressPercent;
+        
+        this.dom.progressDisplay.value = safePercent;
+        this.dom.progressInteractive.value = safePercent;
+    },
+
+    _seek(e) {
+        const seekTime = (e.target.value / 100) * this.audio.duration;
+        if (!isNaN(seekTime)) {
+            this.audio.currentTime = seekTime;
+        }
+    },
+
+    _injectCSS() {
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes spin-vinyl {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+            
+            :root {
+                --wood-dark: #3e2723;
+                --wood-medium: #5d4037;
+                --wood-light: #6d4c41;
+                --metal-dark: #37474f;
+                --metal-light: #546e7a;
+                --cream: #fff8e1;
+                --amber: #ff6f00;
+                --vinyl-black: #1a1a1a;
+            }
+            
+            .vinyl-player {
+                width: 100%;
+                max-width: 600px;
+                margin: 20px auto;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            }
+            
+            .vinyl-player__case {
+                background: linear-gradient(135deg, var(--wood-dark) 0%, var(--wood-medium) 50%, var(--wood-light) 100%);
+                border: 3px solid var(--wood-dark);
+                border-radius: 8px;
+                padding: 20px;
+                box-shadow: 
+                    0 8px 32px rgba(0,0,0,0.4),
+                    inset 0 1px 0 rgba(255,255,255,0.1),
+                    inset 0 -1px 0 rgba(0,0,0,0.3);
+            }
+            
+            .vinyl-player__top-panel {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+                padding: 10px;
+                background: var(--metal-dark);
+                border-radius: 4px;
+            }
+            
+            .vinyl-player__brand-name {
+                font-size: 24px;
+                font-weight: bold;
+                color: var(--cream);
+                letter-spacing: 2px;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            }
+            
+            .vinyl-player__model {
+                display: block;
+                font-size: 10px;
+                color: var(--amber);
+                letter-spacing: 1px;
+                margin-top: 2px;
+            }
+            
+            .vinyl-player__speed-selector {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .vinyl-player__speed-label {
+                color: var(--cream);
+                font-size: 10px;
+                font-weight: bold;
+            }
+            
+            .vinyl-player__rpm-switches {
+                display: flex;
+                gap: 5px;
+            }
+            
+            .vinyl-player__rpm-btn {
+                background: var(--metal-light);
+                color: var(--cream);
+                border: 1px solid var(--metal-dark);
+                padding: 4px 8px;
+                font-size: 11px;
+                font-weight: bold;
+                border-radius: 3px;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            
+            .vinyl-player__rpm-btn--active {
+                background: var(--amber);
+                box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+            }
+            
+            .vinyl-player__turntable-area {
+                position: relative;
+                background: var(--metal-dark);
+                border-radius: 8px;
+                padding: 20px;
+                margin-bottom: 20px;
+                box-shadow: inset 0 2px 8px rgba(0,0,0,0.5);
+            }
+            
+            .vinyl-player__platter {
+                width: 280px;
+                height: 280px;
+                margin: 0 auto;
+                background: radial-gradient(circle, #4a4a4a, #2a2a2a);
+                border-radius: 50%;
+                padding: 10px;
+                box-shadow: 
+                    0 4px 8px rgba(0,0,0,0.5),
+                    inset 0 1px 3px rgba(255,255,255,0.1);
+            }
+            
+            .vinyl-player__record {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                background: var(--vinyl-black);
+                border-radius: 50%;
+                box-shadow: 
+                    0 2px 4px rgba(0,0,0,0.5),
+                    inset 0 0 0 1px rgba(255,255,255,0.05);
+                animation: spin-vinyl 3s linear infinite;
+                animation-play-state: paused;
+            }
+            
+            .vinyl-player__record.is-spinning {
+                animation-play-state: running;
+            }
+            
+            .vinyl-player__album-label {
+                position: absolute;
+                width: 38%;
+                height: 38%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                border-radius: 50%;
+                object-fit: cover;
+                border: 2px solid #222;
+            }
+            
+            .vinyl-player__spindle {
+                position: absolute;
+                width: 8px;
+                height: 8px;
+                background: #888;
+                border-radius: 50%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+                z-index: 2;
+            }
+            
+            .vinyl-player__grooves {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                background: repeating-radial-gradient(
+                    circle at center,
+                    transparent 0,
+                    transparent 2px,
+                    rgba(255,255,255,0.03) 2px,
+                    rgba(255,255,255,0.03) 3px
+                );
+            }
+            
+            .vinyl-player__tonearm-assembly {
+                position: absolute;
+                right: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+            .vinyl-player__tonearm-base {
+                width: 40px;
+                height: 40px;
+                background: radial-gradient(circle, var(--metal-light), var(--metal-dark));
+                border-radius: 50%;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            }
+            
+            .vinyl-player__tonearm {
+                position: absolute;
+                width: 120px;
+                height: 4px;
+                background: linear-gradient(90deg, var(--metal-light), var(--metal-dark));
+                top: 18px;
+                right: 20px;
+                transform-origin: right center;
+                transform: rotate(25deg);
+                transition: transform 0.3s ease;
+                box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            }
+            
+            .vinyl-player__tonearm.is-playing {
+                transform: rotate(0deg);
+            }
+            
+            .vinyl-player__headshell {
+                position: absolute;
+                width: 15px;
+                height: 8px;
+                background: var(--metal-dark);
+                left: -10px;
+                top: -2px;
+                border-radius: 2px;
+            }
+            
+            .vinyl-player__control-panel {
+                display: grid;
+                grid-template-columns: 1fr auto auto;
+                gap: 20px;
+                align-items: center;
+                background: var(--metal-dark);
+                padding: 15px;
+                border-radius: 4px;
+            }
+            
+            .vinyl-player__info-display {
+                background: linear-gradient(135deg, #3e3e3e, #2a2a2a);
+                padding: 10px;
+                border-radius: 4px;
+                border: 2px solid #222;
+                box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+            }
+            
+            .vinyl-player__now-playing {
+                font-size: 9px;
+                color: var(--amber);
+                letter-spacing: 1px;
+                margin-bottom: 5px;
+            }
+            
+            .vinyl-player__track-info {
+                margin-bottom: 8px;
+            }
+            
+            .vinyl-player__song-title {
+                font-size: 14px;
+                color: var(--cream);
+                font-weight: bold;
+                margin-bottom: 2px;
+            }
+            
+            .vinyl-player__song-artist {
+                font-size: 11px;
+                color: #aaa;
+            }
+            
+            .progress-groove {
+                position: relative;
+                height: 6px;
+            }
+            
+            .progress-groove--display,
+            .progress-groove--interactive {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+            }
+            
+            .progress-groove--display {
+                -webkit-appearance: none;
+                appearance: none;
+                background: #1a1a1a;
+                border-radius: 3px;
+            }
+            
+            .progress-groove--display::-webkit-progress-bar {
+                background: #1a1a1a;
+                border-radius: 3px;
+            }
+            
+            .progress-groove--display::-webkit-progress-value {
+                background: var(--amber);
+                border-radius: 3px;
+            }
+            
+            .progress-groove--interactive {
+                -webkit-appearance: none;
+                background: transparent;
+                cursor: pointer;
+                z-index: 2;
+            }
+            
+            .progress-groove--interactive::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                width: 12px;
+                height: 12px;
+                background: var(--cream);
+                border-radius: 50%;
+                cursor: pointer;
+            }
+            
+            .vinyl-player__controls {
+                display: flex;
+                gap: 10px;
+            }
+            
+            .vinyl-player__control-btn {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background: var(--metal-light);
+                border: 2px solid var(--metal-dark);
+                border-radius: 4px;
+                padding: 8px 12px;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            
+            .vinyl-player__control-btn:hover {
+                background: #607d8b;
+            }
+            
+            .vinyl-player__control-btn:active {
+                transform: translateY(1px);
+            }
+            
+            .vinyl-player__control-btn .btn-label {
+                font-size: 9px;
+                font-weight: bold;
+                color: var(--cream);
+                letter-spacing: 1px;
+                margin-bottom: 4px;
+            }
+            
+            .vinyl-player__control-btn .btn-indicator {
+                width: 8px;
+                height: 8px;
+                background: #444;
+                border-radius: 50%;
+                box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+            }
+            
+            .vinyl-player__control-btn.is-active .btn-indicator {
+                background: var(--amber);
+                box-shadow: 0 0 8px var(--amber);
+            }
+            
+            .vinyl-player__volume-control {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .vinyl-player__volume-label {
+                font-size: 9px;
+                color: var(--cream);
+                letter-spacing: 1px;
+                margin-bottom: 8px;
+                font-weight: bold;
+            }
+            
+            .vinyl-player__knob-wrapper {
+                position: relative;
+            }
+            
+            .vinyl-player__knob-container {
+                position: relative;
+                width: 60px;
+                height: 60px;
+            }
+            
+            .vinyl-player__knob {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(circle at 30% 30%, #6a6a6a, #3a3a3a);
+                border-radius: 50%;
+                box-shadow: 
+                    0 4px 8px rgba(0,0,0,0.5),
+                    inset 0 -2px 4px rgba(0,0,0,0.3),
+                    inset 0 2px 2px rgba(255,255,255,0.1);
+                transform: rotate(-135deg);
+                transition: transform 0.1s ease;
+                cursor: pointer;
+            }
+            
+            .vinyl-player__knob-indicator {
+                position: absolute;
+                width: 4px;
+                height: 20px;
+                background: var(--cream);
+                top: 5px;
+                left: 50%;
+                transform: translateX(-50%);
+                border-radius: 2px;
+                box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            }
+            
+            .vinyl-player__knob-center {
+                position: absolute;
+                width: 15px;
+                height: 15px;
+                background: radial-gradient(circle, #4a4a4a, #2a2a2a);
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                border-radius: 50%;
+                box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+            }
+            
+            .vinyl-player__volume-slider {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                cursor: pointer;
+                z-index: 2;
+            }
+            
+            .vinyl-player__knob-scale {
+                display: flex;
+                justify-content: space-around;
+                margin-top: 8px;
+                padding: 0 5px;
+            }
+            
+            .vinyl-player__knob-scale .scale-mark {
+                font-size: 8px;
+                color: var(--cream);
+                opacity: 0.7;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+};
+
+// the songs
+const mainPlaylist = new Playlist([
+    new Song( "St. Chroma", "Tyler, The Creator", "https://upload.wikimedia.org/wikipedia/en/5/5b/Chromakopia_CD_cover.jpg", "https://audio.jukehost.co.uk/OJ5E0ssxcGFM9TQYGmixpt549j95LxeK"),
+    new Song( "SIRENS", "Travis Scott", "https://upload.wikimedia.org/wikipedia/en/2/23/Travis_Scott_-_Utopia.png", "https://audio.jukehost.co.uk/tMqMoa9zNtWgKpMJLgBE7iBITA8ivTRo"),
+    new Song( "Rich Men North of Richmond", "Oliver Anthony", "https://upload.wikimedia.org/wikipedia/en/d/d4/Oliver_Anthony_-_Rich_Men_North_of_Richmond.png", "https://audio.jukehost.co.uk/Po5eKwlVG0M4wQ3oOG9otBNFevRmkpPC"),
+    new Song( "Trance", "Metro Boomin", "https://i.scdn.co/image/ab67616d0000b273c4fee55d7b51479627c31f89", "https://audio.jukehost.co.uk/L5xxytRx8xzIZJGO3mr6fGlVxD3s99BP"),
+    new Song( "Sacrifice", "The Weeknd", "https://i.scdn.co/image/ab67616d0000b2734ab2520c2c77a1d66b9ee21d", "https://audio.jukehost.co.uk/OPJ03lifktGkFiDtX6zABItt8gdfqmvn"),
+    new Song( "Too Sweet", "Hozier", "https://upload.wikimedia.org/wikipedia/en/9/9a/Hozier_-_Unheard.png", "https://audio.jukehost.co.uk/vM6S0Sokz9qcJ2TPv0R6WcAXhvNFhYoT"),
+	new Song( "Houdini", "Eminem", "https://i1.sndcdn.com/artworks-P4ulqFUSDbnv-0-t500x500.jpg", "https://audio.jukehost.co.uk/eQ7VI0s7sFL5GAm66UJDSbYh8oSnUAQC"),
+]);
+
+// start it up!
+VinylPlayer.init("#game_window", mainPlaylist);
+
+
+
