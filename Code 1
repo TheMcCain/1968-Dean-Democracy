@@ -894,7 +894,7 @@ e.creditsPage = () => {
 
 e.credits = "<button onclick='e.creditsPage()'>The Dean Democracy Team</button>"
 
-// A viynl turntable-like player
+// A vinyl turntable-like player
 // based off an alt player made for Moonbeam '92
 class Song {
     constructor(title, artist, coverLink, audioLink) {
@@ -925,6 +925,11 @@ class Playlist {
     playNext() {
         if (this.songs.length === 0) return;
         this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length;
+    }
+	
+	playPrevious() {
+        if (this.songs.length === 0) return;
+        this.currentSongIndex = (this.currentSongIndex - 1 + this.songs.length) % this.songs.length;
     }
 }
 
@@ -964,84 +969,97 @@ const VinylPlayer = {
         const playerHTML = `
             <div class="vinyl-player">
                 <div class="vinyl-player__case">
-                    <div class="vinyl-player__top-panel">
+                    <div class="vinyl-player__header">
                         <div class="vinyl-player__brand">
                             <span class="vinyl-player__brand-name">GARRARD</span>
                             <span class="vinyl-player__model">MODEL 401</span>
                         </div>
-                        <div class="vinyl-player__speed-selector">
-                            <label class="vinyl-player__speed-label">SPEED</label>
-                            <div class="vinyl-player__rpm-switches">
-                                <button class="vinyl-player__rpm-btn vinyl-player__rpm-btn--active">33⅓</button>
-                                <button class="vinyl-player__rpm-btn">45</button>
-                            </div>
-                        </div>
                     </div>
                     
-                    <div class="vinyl-player__turntable-area">
-                        <div class="vinyl-player__platter">
-                            <div class="vinyl-player__record">
-                                <img src="" alt="Album Cover" class="vinyl-player__album-label">
-                                <div class="vinyl-player__spindle"></div>
-                                <div class="vinyl-player__grooves"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="vinyl-player__tonearm-assembly">
-                            <div class="vinyl-player__tonearm-base"></div>
-                            <div class="vinyl-player__tonearm">
-                                <div class="vinyl-player__headshell"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="vinyl-player__control-panel">
-                        <div class="vinyl-player__info-display">
-                            <div class="vinyl-player__now-playing">NOW PLAYING</div>
-                            <div class="vinyl-player__track-info">
-                                <div class="vinyl-player__song-title"></div>
-                                <div class="vinyl-player__song-artist"></div>
-                            </div>
-                            <div class="vinyl-player__progress-track">
-                                <div class="progress-groove">
-                                    <progress class="progress-groove--display" value="0" max="100"></progress>
-                                    <input type="range" class="progress-groove--interactive" value="0" min="0" max="100" step="0.1">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="vinyl-player__controls">
-                            <button class="vinyl-player__control-btn vinyl-player__control-btn--play" title="Start/Stop">
-                                <span class="btn-label">START</span>
-                                <div class="btn-indicator"></div>
-                            </button>
-                            <button class="vinyl-player__control-btn vinyl-player__control-btn--cue" title="Cue">
-                                <span class="btn-label">CUE</span>
-                                <div class="btn-indicator"></div>
-                            </button>
-                            <button class="vinyl-player__control-btn vinyl-player__control-btn--next" title="Next Record">
-                                <span class="btn-label">NEXT</span>
-                                <div class="btn-indicator"></div>
-                            </button>
-                        </div>
-                        
-                        <div class="vinyl-player__volume-control">
-                            <label class="vinyl-player__volume-label">VOLUME</label>
-                            <div class="vinyl-player__knob-wrapper">
-                                <div class="vinyl-player__knob-container">
-                                    <div class="vinyl-player__knob">
-                                        <div class="vinyl-player__knob-indicator"></div>
-                                        <div class="vinyl-player__knob-center"></div>
+                    <div class="vinyl-player__main-section">
+                        <div class="vinyl-player__turntable-section">
+                            <div class="vinyl-player__platter-container">
+                                <div class="vinyl-player__platter">
+                                    <div class="vinyl-player__record">
+                                        <img src="" alt="Album Cover" class="vinyl-player__album-label">
+                                        <div class="vinyl-player__spindle"></div>
+                                        <div class="vinyl-player__grooves"></div>
                                     </div>
-                                    <input type="range" class="vinyl-player__volume-slider" min="0" max="10" step="1" value="5">
                                 </div>
-                                <div class="vinyl-player__knob-scale">
-                                    <span class="scale-mark" data-value="0">0</span>
-                                    <span class="scale-mark" data-value="2">2</span>
-                                    <span class="scale-mark" data-value="4">4</span>
-                                    <span class="scale-mark" data-value="6">6</span>
-                                    <span class="scale-mark" data-value="8">8</span>
-                                    <span class="scale-mark" data-value="10">10</span>
+                                
+                                <div class="vinyl-player__tonearm-assembly">
+                                    <div class="vinyl-player__tonearm-base"></div>
+                                    <div class="vinyl-player__tonearm">
+                                        <div class="vinyl-player__headshell"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="vinyl-player__controls-section">
+                            <div class="vinyl-player__info-panel">
+                                <div class="vinyl-player__track-display">
+                                    <div class="vinyl-player__now-playing">NOW PLAYING</div>
+                                    <div class="vinyl-player__song-title"></div>
+                                    <div class="vinyl-player__song-artist"></div>
+                                </div>
+                                <div class="vinyl-player__progress-track">
+                                    <div class="progress-groove">
+                                        <progress class="progress-groove--display" value="0" max="100"></progress>
+                                        <input type="range" class="progress-groove--interactive" value="0" min="0" max="100" step="0.1">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="vinyl-player__button-row">
+                                <button class="vinyl-player__control-btn vinyl-player__control-btn--play" title="Start/Stop">
+                                    <span class="btn-label">START</span>
+                                    <div class="btn-indicator"></div>
+                                </button>
+                                <button class="vinyl-player__control-btn vinyl-player__control-btn--cue" title="Cue">
+                                    <span class="btn-label">CUE</span>
+                                    <div class="btn-indicator"></div>
+                                </button>
+                                <!-- ADDED: Back button HTML -->
+                                <button class="vinyl-player__control-btn vinyl-player__control-btn--back" title="Previous Record">
+                                    <span class="btn-label">BACK</span>
+                                    <div class="btn-indicator"></div>
+                                </button>
+                                <button class="vinyl-player__control-btn vinyl-player__control-btn--next" title="Next Record">
+                                    <span class="btn-label">NEXT</span>
+                                    <div class="btn-indicator"></div>
+                                </button>
+                                
+                                <div class="vinyl-player__speed-selector">
+                                    <label class="vinyl-player__speed-label">SPEED</label>
+                                    <div class="vinyl-player__rpm-switches">
+                                        <button class="vinyl-player__rpm-btn vinyl-player__rpm-btn--active">33⅓</button>
+                                        <button class="vinyl-player__rpm-btn">45</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="vinyl-player__volume-section">
+                                <label class="vinyl-player__volume-label">VOLUME</label>
+                                <div class="vinyl-player__volume-wrapper">
+                                    <div class="vinyl-player__knob-assembly">
+                                        <span class="knob-label knob-label--min">0</span>
+                                        <div class="vinyl-player__knob-container">
+                                            <div class="vinyl-player__knob">
+                                                <div class="vinyl-player__knob-indicator"></div>
+                                                <div class="vinyl-player__knob-center"></div>
+                                            </div>
+                                            <input type="range" class="vinyl-player__volume-slider" min="0" max="10" step="1" value="5">
+                                        </div>
+                                        <span class="knob-label knob-label--max">10</span>
+                                    </div>
+                                    <div class="vinyl-player__knob-scale">
+                                        <span class="scale-tick">|</span>
+                                        <span class="scale-tick">|</span>
+                                        <span class="scale-tick">|</span>
+                                        <span class="scale-tick">|</span>
+                                        <span class="scale-tick">|</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1063,6 +1081,7 @@ const VinylPlayer = {
             songArtist: player.querySelector('.vinyl-player__song-artist'),
             playBtn: player.querySelector('.vinyl-player__control-btn--play'),
             cueBtn: player.querySelector('.vinyl-player__control-btn--cue'),
+            backBtn: player.querySelector('.vinyl-player__control-btn--back'),
             nextBtn: player.querySelector('.vinyl-player__control-btn--next'),
             progressDisplay: player.querySelector('.progress-groove--display'),
             progressInteractive: player.querySelector('.progress-groove--interactive'),
@@ -1074,6 +1093,7 @@ const VinylPlayer = {
     _bindEvents() {
         this.dom.playBtn.addEventListener('click', () => this.togglePlay());
         this.dom.cueBtn.addEventListener('click', () => this.stop());
+        this.dom.backBtn.addEventListener('click', () => this.playPrevious());
         this.dom.nextBtn.addEventListener('click', () => this.playNext());
         
         this.audio.addEventListener('timeupdate', () => this._updateProgress());
@@ -1138,6 +1158,12 @@ const VinylPlayer = {
         this.isPlaying = false;
         this._updatePlayState();
     },
+    
+    playPrevious() {
+        if (!this.playlist || this.playlist.songs.length === 0) return;
+        this.playlist.playPrevious();
+        this._playSongAtIndex(this.playlist.currentSongIndex, this.isPlaying || this.audio.paused);
+    },
 
     playNext() {
         if (!this.playlist || this.playlist.songs.length === 0) return;
@@ -1179,22 +1205,22 @@ const VinylPlayer = {
                 from { transform: rotate(0deg); }
                 to { transform: rotate(360deg); }
             }
-            
-            :root {
-                --wood-dark: #3e2723;
-                --wood-medium: #5d4037;
-                --wood-light: #6d4c41;
-                --metal-dark: #37474f;
-                --metal-light: #546e7a;
-                --cream: #fff8e1;
-                --amber: #ff6f00;
-                --vinyl-black: #1a1a1a;
-            }
+			
+			:root {
+				--wood-dark: #000;
+				--wood-medium: #1b1b1b;
+				--wood-light: #363636;
+				--metal-dark: #111;
+				--metal-light: #444;
+				--cream: #e5e5e5;
+				--amber: #c8c8c8;
+				--vinyl-black: #000;
+			}
             
             .vinyl-player {
                 width: 100%;
-                max-width: 600px;
-                margin: 20px auto;
+                max-width: 750px;
+                margin: 10px auto;
                 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             }
             
@@ -1202,89 +1228,66 @@ const VinylPlayer = {
                 background: linear-gradient(135deg, var(--wood-dark) 0%, var(--wood-medium) 50%, var(--wood-light) 100%);
                 border: 3px solid var(--wood-dark);
                 border-radius: 8px;
-                padding: 20px;
+                padding: 12px 15px;
                 box-shadow: 
                     0 8px 32px rgba(0,0,0,0.4),
                     inset 0 1px 0 rgba(255,255,255,0.1),
                     inset 0 -1px 0 rgba(0,0,0,0.3);
             }
             
-            .vinyl-player__top-panel {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 20px;
-                padding: 10px;
+            .vinyl-player__header {
+                text-align: center;
+                margin-bottom: 10px;
+                padding: 6px;
                 background: var(--metal-dark);
                 border-radius: 4px;
             }
             
             .vinyl-player__brand-name {
-                font-size: 24px;
+                font-size: 20px;
                 font-weight: bold;
                 color: var(--cream);
-                letter-spacing: 2px;
+                letter-spacing: 3px;
                 text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
             }
             
             .vinyl-player__model {
-                display: block;
-                font-size: 10px;
+                font-size: 9px;
                 color: var(--amber);
-                letter-spacing: 1px;
-                margin-top: 2px;
+                letter-spacing: 2px;
+                margin-left: 10px;
             }
             
-            .vinyl-player__speed-selector {
-                display: flex;
-                align-items: center;
-                gap: 10px;
+            .vinyl-player__main-section {
+                display: grid;
+                grid-template-columns: 250px 1fr;
+                gap: 15px;
+                align-items: stretch;
             }
             
-            .vinyl-player__speed-label {
-                color: var(--cream);
-                font-size: 10px;
-                font-weight: bold;
-            }
-            
-            .vinyl-player__rpm-switches {
-                display: flex;
-                gap: 5px;
-            }
-            
-            .vinyl-player__rpm-btn {
-                background: var(--metal-light);
-                color: var(--cream);
-                border: 1px solid var(--metal-dark);
-                padding: 4px 8px;
-                font-size: 11px;
-                font-weight: bold;
-                border-radius: 3px;
-                cursor: pointer;
-                transition: all 0.2s;
-            }
-            
-            .vinyl-player__rpm-btn--active {
-                background: var(--amber);
-                box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
-            }
-            
-            .vinyl-player__turntable-area {
-                position: relative;
+            .vinyl-player__turntable-section {
                 background: var(--metal-dark);
                 border-radius: 8px;
-                padding: 20px;
-                margin-bottom: 20px;
+                padding: 15px;
                 box-shadow: inset 0 2px 8px rgba(0,0,0,0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .vinyl-player__platter-container {
+                position: relative;
+                width: 200px;
+                height: 200px;
             }
             
             .vinyl-player__platter {
-                width: 280px;
-                height: 280px;
-                margin: 0 auto;
+                width: 180px;
+                height: 180px;
+                margin: 10px auto;
                 background: radial-gradient(circle, #4a4a4a, #2a2a2a);
                 border-radius: 50%;
-                padding: 10px;
+                padding: 8px;
                 box-shadow: 
                     0 4px 8px rgba(0,0,0,0.5),
                     inset 0 1px 3px rgba(255,255,255,0.1);
@@ -1309,8 +1312,8 @@ const VinylPlayer = {
             
             .vinyl-player__album-label {
                 position: absolute;
-                width: 38%;
-                height: 38%;
+                width: 40%;
+                height: 40%;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
@@ -1321,8 +1324,8 @@ const VinylPlayer = {
             
             .vinyl-player__spindle {
                 position: absolute;
-                width: 8px;
-                height: 8px;
+                width: 6px;
+                height: 6px;
                 background: #888;
                 border-radius: 50%;
                 top: 50%;
@@ -1348,14 +1351,14 @@ const VinylPlayer = {
             
             .vinyl-player__tonearm-assembly {
                 position: absolute;
-                right: 20px;
+                right: -10px;
                 top: 50%;
                 transform: translateY(-50%);
             }
             
             .vinyl-player__tonearm-base {
-                width: 40px;
-                height: 40px;
+                width: 30px;
+                height: 30px;
                 background: radial-gradient(circle, var(--metal-light), var(--metal-dark));
                 border-radius: 50%;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.5);
@@ -1363,11 +1366,11 @@ const VinylPlayer = {
             
             .vinyl-player__tonearm {
                 position: absolute;
-                width: 120px;
-                height: 4px;
+                width: 90px;
+                height: 3px;
                 background: linear-gradient(90deg, var(--metal-light), var(--metal-dark));
-                top: 18px;
-                right: 20px;
+                top: 14px;
+                right: 15px;
                 transform-origin: right center;
                 transform: rotate(25deg);
                 transition: transform 0.3s ease;
@@ -1380,58 +1383,61 @@ const VinylPlayer = {
             
             .vinyl-player__headshell {
                 position: absolute;
-                width: 15px;
-                height: 8px;
+                width: 12px;
+                height: 6px;
                 background: var(--metal-dark);
-                left: -10px;
-                top: -2px;
+                left: -8px;
+                top: -1.5px;
                 border-radius: 2px;
             }
             
-            .vinyl-player__control-panel {
-                display: grid;
-                grid-template-columns: 1fr auto auto;
-                gap: 20px;
-                align-items: center;
-                background: var(--metal-dark);
-                padding: 15px;
-                border-radius: 4px;
+            .vinyl-player__controls-section {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
             }
             
-            .vinyl-player__info-display {
-                background: linear-gradient(135deg, #3e3e3e, #2a2a2a);
-                padding: 10px;
+            .vinyl-player__info-panel {
+                background: linear-gradient(135deg, #3a3a3a, #1c1c1c);
+                padding: 8px 12px;
                 border-radius: 4px;
                 border: 2px solid #222;
                 box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
             }
             
-            .vinyl-player__now-playing {
-                font-size: 9px;
-                color: var(--amber);
-                letter-spacing: 1px;
-                margin-bottom: 5px;
+            .vinyl-player__track-display {
+                margin-bottom: 6px;
             }
             
-            .vinyl-player__track-info {
-                margin-bottom: 8px;
+            .vinyl-player__now-playing {
+                font-size: 8px;
+                color: var(--amber);
+                letter-spacing: 1px;
+                margin-bottom: 3px;
             }
             
             .vinyl-player__song-title {
-                font-size: 14px;
+                font-size: 13px;
                 color: var(--cream);
                 font-weight: bold;
                 margin-bottom: 2px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             
             .vinyl-player__song-artist {
-                font-size: 11px;
+                font-size: 10px;
                 color: #aaa;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             
             .progress-groove {
                 position: relative;
-                height: 6px;
+                height: 5px;
+                margin-top: 4px;
             }
             
             .progress-groove--display,
@@ -1468,16 +1474,20 @@ const VinylPlayer = {
             
             .progress-groove--interactive::-webkit-slider-thumb {
                 -webkit-appearance: none;
-                width: 12px;
-                height: 12px;
+                width: 10px;
+                height: 10px;
                 background: var(--cream);
                 border-radius: 50%;
                 cursor: pointer;
             }
             
-            .vinyl-player__controls {
+            .vinyl-player__button-row {
                 display: flex;
-                gap: 10px;
+                gap: 8px;
+                align-items: center;
+                background: var(--metal-dark);
+                padding: 8px;
+                border-radius: 4px;
             }
             
             .vinyl-player__control-btn {
@@ -1488,7 +1498,7 @@ const VinylPlayer = {
                 background: var(--metal-light);
                 border: 2px solid var(--metal-dark);
                 border-radius: 4px;
-                padding: 8px 12px;
+                padding: 6px 10px;
                 cursor: pointer;
                 transition: all 0.2s;
             }
@@ -1502,16 +1512,16 @@ const VinylPlayer = {
             }
             
             .vinyl-player__control-btn .btn-label {
-                font-size: 9px;
+                font-size: 8px;
                 font-weight: bold;
                 color: var(--cream);
                 letter-spacing: 1px;
-                margin-bottom: 4px;
+                margin-bottom: 3px;
             }
             
             .vinyl-player__control-btn .btn-indicator {
-                width: 8px;
-                height: 8px;
+                width: 6px;
+                height: 6px;
                 background: #444;
                 border-radius: 50%;
                 box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
@@ -1519,31 +1529,94 @@ const VinylPlayer = {
             
             .vinyl-player__control-btn.is-active .btn-indicator {
                 background: var(--amber);
-                box-shadow: 0 0 8px var(--amber);
+                box-shadow: 0 0 6px var(--amber);
             }
             
-            .vinyl-player__volume-control {
+            .vinyl-player__speed-selector {
                 display: flex;
-                flex-direction: column;
                 align-items: center;
+                gap: 8px;
+                margin-left: auto;
+                padding-left: 10px;
+                border-left: 1px solid rgba(255,255,255,0.1);
             }
             
-            .vinyl-player__volume-label {
-                font-size: 9px;
+            .vinyl-player__speed-label {
                 color: var(--cream);
-                letter-spacing: 1px;
-                margin-bottom: 8px;
+                font-size: 8px;
                 font-weight: bold;
             }
             
-            .vinyl-player__knob-wrapper {
-                position: relative;
+            .vinyl-player__rpm-switches {
+                display: flex;
+                gap: 4px;
+            }
+            
+            .vinyl-player__rpm-btn {
+                background: var(--metal-light);
+                color: var(--cream);
+                border: 1px solid var(--metal-dark);
+                padding: 3px 6px;
+                font-size: 9px;
+                font-weight: bold;
+                border-radius: 3px;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            
+            .vinyl-player__rpm-btn--active {
+                background: #626262;
+                box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+            }
+            
+            .vinyl-player__volume-section {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                background: var(--metal-dark);
+                padding: 10px 12px;
+                border-radius: 4px;
+            }
+            
+            .vinyl-player__volume-label {
+                font-size: 8px;
+                color: var(--cream);
+                letter-spacing: 1px;
+                font-weight: bold;
+            }
+            
+            .vinyl-player__volume-wrapper {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                flex: 1;
+            }
+            
+            .vinyl-player__knob-assembly {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            
+            .knob-label {
+                font-size: 9px;
+                color: var(--cream);
+                opacity: 0.8;
+                font-weight: bold;
+            }
+            
+            .knob-label--min {
+                color: #8bc34a;
+            }
+            
+            .knob-label--max {
+                color: #ff5252;
             }
             
             .vinyl-player__knob-container {
                 position: relative;
-                width: 60px;
-                height: 60px;
+                width: 45px;
+                height: 45px;
             }
             
             .vinyl-player__knob {
@@ -1553,7 +1626,7 @@ const VinylPlayer = {
                 background: radial-gradient(circle at 30% 30%, #6a6a6a, #3a3a3a);
                 border-radius: 50%;
                 box-shadow: 
-                    0 4px 8px rgba(0,0,0,0.5),
+                    0 3px 6px rgba(0,0,0,0.5),
                     inset 0 -2px 4px rgba(0,0,0,0.3),
                     inset 0 2px 2px rgba(255,255,255,0.1);
                 transform: rotate(-135deg);
@@ -1563,10 +1636,10 @@ const VinylPlayer = {
             
             .vinyl-player__knob-indicator {
                 position: absolute;
-                width: 4px;
-                height: 20px;
+                width: 3px;
+                height: 15px;
                 background: var(--cream);
-                top: 5px;
+                top: 4px;
                 left: 50%;
                 transform: translateX(-50%);
                 border-radius: 2px;
@@ -1575,8 +1648,8 @@ const VinylPlayer = {
             
             .vinyl-player__knob-center {
                 position: absolute;
-                width: 15px;
-                height: 15px;
+                width: 12px;
+                height: 12px;
                 background: radial-gradient(circle, #4a4a4a, #2a2a2a);
                 top: 50%;
                 left: 50%;
@@ -1596,15 +1669,15 @@ const VinylPlayer = {
             
             .vinyl-player__knob-scale {
                 display: flex;
-                justify-content: space-around;
-                margin-top: 8px;
-                padding: 0 5px;
+                gap: 8px;
+                margin-left: auto;
+                align-items: center;
             }
             
-            .vinyl-player__knob-scale .scale-mark {
-                font-size: 8px;
+            .scale-tick {
+                font-size: 10px;
                 color: var(--cream);
-                opacity: 0.7;
+                opacity: 0.3;
             }
         `;
         document.head.appendChild(style);
@@ -1624,5 +1697,3 @@ const mainPlaylist = new Playlist([
 
 // start it up!
 VinylPlayer.init("#game_window", mainPlaylist);
-
-
