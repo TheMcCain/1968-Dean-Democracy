@@ -500,7 +500,7 @@ jet_data = {
     "backgroundImageUrl": "https://i.imgur.com/I3d2mLG.png",
     "endingTextColor": "#000000",
     "customQuote": "",
-    "gameTitle": "dean democracy"
+    "gameTitle": "DEANDEMOCRACY		"
 }
 
 //#startcode
@@ -1361,11 +1361,11 @@ const VinylPlayer = {
 const mainPlaylist = new Playlist([
     new Song( "Music For Night People", "The Larry Page Orchestra", "https://i.imgur.com/LZqbqxA.jpeg", "https://audio.jukehost.co.uk/CZGLN0owECLaH2RrCLkilZjMTG70sh80"),
     new Song( "Eve of Destruction", "Barry McGuire", "https://upload.wikimedia.org/wikipedia/en/5/5e/Eve_of_Destruction.jpg", "https://audio.jukehost.co.uk/Y0JZqpMSbErxTtiEkFPr8Ckeiqw0RxWf"),
-    new Song( "Rich Men North of Richmond", "Oliver Anthony", "https://upload.wikimedia.org/wikipedia/en/d/d4/Oliver_Anthony_-_Rich_Men_North_of_Richmond.png", "https://audio.jukehost.co.uk/Po5eKwlVG0M4wQ3oOG9otBNFevRmkpPC"),
-    new Song( "Trance", "Metro Boomin", "https://i.scdn.co/image/ab67616d0000b273c4fee55d7b51479627c31f89", "https://audio.jukehost.co.uk/L5xxytRx8xzIZJGO3mr6fGlVxD3s99BP"),
-    new Song( "Sacrifice", "The Weeknd", "https://i.scdn.co/image/ab67616d0000b2734ab2520c2c77a1d66b9ee21d", "https://audio.jukehost.co.uk/OPJ03lifktGkFiDtX6zABItt8gdfqmvn"),
-    new Song( "Too Sweet", "Hozier", "https://upload.wikimedia.org/wikipedia/en/9/9a/Hozier_-_Unheard.png", "https://audio.jukehost.co.uk/vM6S0Sokz9qcJ2TPv0R6WcAXhvNFhYoT"),
-	new Song( "Houdini", "Eminem", "https://i1.sndcdn.com/artworks-P4ulqFUSDbnv-0-t500x500.jpg", "https://audio.jukehost.co.uk/eQ7VI0s7sFL5GAm66UJDSbYh8oSnUAQC"),
+    new Song( "Richard Cory", "Simon and Garfunkel", "https://upload.wikimedia.org/wikipedia/en/1/1c/SoundsSilence.jpg", "https://audio.jukehost.co.uk/jiYkpQKOJvTg9NLI603MG4QBWJBckKaF"),
+    new Song( "Helter Skelter", "The Beatles", "https://i.imgur.com/AZIhYoP.jpeg", "https://file.garden/Z7qfmQZIZjO_xV5N/HelterSkelter.mp3"),
+    new Song( "Fire and Ice", "The Music Man", "https://i.imgur.com/BIutPzX.jpeg", "https://file.garden/Z7qfmQZIZjO_xV5N/Clift.mp3"),
+    new Song( "Ball of Confusion", "The Temptations", "https://upload.wikimedia.org/wikipedia/en/9/9e/Tempts-greatest-vol2.jpg", "https://file.garden/Z7qfmQZIZjO_xV5N/confusion.mp3"),
+	new Song( "The Ballad of the Green Berets", "Barry Sadler", "https://upload.wikimedia.org/wikipedia/en/b/bc/Ballad_of_the_Green_Berets.jpg", "https://audio.jukehost.co.uk/6Dio30IKA8peEUnu9mnsXWZfhdcqwpDR"),
 ]);
 
 // start it up!
