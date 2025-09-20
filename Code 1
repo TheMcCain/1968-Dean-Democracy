@@ -12,7 +12,7 @@ campaignTrail_temp.election_json = [
             "has_visits": 1,
             "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/1968-no-majority.jpg",
             "creator": "Dan Bryan",
-            "display_year": "1968  - dean democracy"
+            "display_year": "1968  - DEANDEMOCRACY"
         }
     }
 ]
@@ -433,7 +433,7 @@ campaignTrail_temp.running_mate_json = [
     }
 ]
 
-campaignTrail_temp.credits = "the dean democracy Team"
+campaignTrail_temp.credits = "the DEANDEMOCRACY Team"
 
 campaignTrail_temp.global_parameter_json = [
     {
@@ -487,7 +487,7 @@ campaignTrail_temp.temp_election_list = [
         "id": 4,
         "year": 1968,
         "is_premium": 0,
-        "display_year": "1968  - dean democracy"
+        "display_year": "1968  - DEANDEMOCRACY"
     }
 ]
 
@@ -511,7 +511,7 @@ corrr = `
     color: dark gray;
     padding: 10px;
   ">
-    dean democracy
+    DEANDEMOCRACY
   </h2>
 `;
 
@@ -1370,6 +1370,5 @@ const mainPlaylist = new Playlist([
 
 // start it up!
 VinylPlayer.init("#game_window", mainPlaylist);
-
 
 
