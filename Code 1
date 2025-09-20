@@ -101,7 +101,7 @@ campaignTrail_temp.candidate_json = [
             "color_hex": "#FF0000",
             "secondary_color_hex": "#FFA0A0",
             "is_active": 0,
-            "image_url": "https://www.jetsimon.com/public/static/images/spiro-agnew-1968.jpg",
+            "image_url": "https://i.imgur.com/sKz7aow.png",
             "electoral_victory_message": "n/a",
             "electoral_loss_message": "n/a",
             "no_electoral_majority_message": "n/a",
@@ -589,9 +589,11 @@ e.creditsPage = () => {
   credits_html = `
 <h2>Head of Project</h2>
 <p>Ellimoo</p>
-<h2>Lead Coder</h2>
+<h2>Coding</h2>
 <p>TheMcCain</p>
 <h2>Writing</h2>
+<p>StrawberryMaster</p>
+<p>4N3URY5M</p>
 <p>C0SM0</p>
 <p>Viva</p>
 <h2>Special Thanks</h2>
