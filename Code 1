@@ -578,6 +578,8 @@ button.onclick = changeBanner;
 // Custom favicon
 $("#dynamic-favicon").attr("href", "https://files.catbox.moe/jgh9sr.png");
 
+campaignTrail_temp.modBoxTheme = { "header_color": "#0f0f0f", "header_image_url": "https://files.catbox.moe/tr6n9u.png", "header_text_color": "#ffffff", "description_text_color": "#ffffff", "description_background_color": "#171717", "main_color": "#201d1d", "secondary_color": "#0f0f0f", "ui_text_color": "#FFFFFF" }
+
 e=campaignTrail_temp
 
 var changeGameDisp = (hide) => {
