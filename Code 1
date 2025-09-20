@@ -1599,11 +1599,11 @@ const VinylPlayer = {
 const mainPlaylist = new Playlist([
     new Song( "Music For Night People", "The Larry Page Orchestra", "https://i.imgur.com/LZqbqxA.jpeg", "https://audio.jukehost.co.uk/CZGLN0owECLaH2RrCLkilZjMTG70sh80"),
     new Song( "Eve of Destruction", "Barry McGuire", "https://upload.wikimedia.org/wikipedia/en/5/5e/Eve_of_Destruction.jpg", "https://audio.jukehost.co.uk/Y0JZqpMSbErxTtiEkFPr8Ckeiqw0RxWf"),
-    new Song( "Richard Cory", "Simon and Garfunkel", "https://upload.wikimedia.org/wikipedia/en/1/1c/SoundsSilence.jpg", "https://audio.jukehost.co.uk/jiYkpQKOJvTg9NLI603MG4QBWJBckKaF"),
+    new Song( "Build Me Up Buttercup", "The Foundations", "https://i.imgur.com/DepL6QP.jpeg", "https://file.garden/Z7qfmQZIZjO_xV5N/BuildMeUp.mp3"),
     new Song( "Helter Skelter", "The Beatles", "https://i.imgur.com/AZIhYoP.jpeg", "https://file.garden/Z7qfmQZIZjO_xV5N/HelterSkelter.mp3"),
     new Song( "Fire and Ice", "The Music Man", "https://i.imgur.com/BIutPzX.jpeg", "https://file.garden/Z7qfmQZIZjO_xV5N/Clift.mp3"),
     new Song( "Ball of Confusion", "The Temptations", "https://upload.wikimedia.org/wikipedia/en/9/9e/Tempts-greatest-vol2.jpg", "https://file.garden/Z7qfmQZIZjO_xV5N/confusion.mp3"),
-	new Song( "The Ballad of the Green Berets", "Barry Sadler", "https://upload.wikimedia.org/wikipedia/en/b/bc/Ballad_of_the_Green_Berets.jpg", "https://audio.jukehost.co.uk/6Dio30IKA8peEUnu9mnsXWZfhdcqwpDR"),
+	new Song( "Jumpin' Jack Flash", "The Rolling Stones", "https://i.imgur.com/FqBNcu2.jpeg", "https://file.garden/Z7qfmQZIZjO_xV5N/JackFlash.mp3"),
 ]);
 
 // start it up!
