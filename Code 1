@@ -740,7 +740,7 @@ jet_data = {
     "headerColor": "#0f0f0f",
     "windowColor": "#171717",
     "containerColor": "#201d1d",
-    "innerWindowColor": "#1c2527",
+    "innerWindowColor": "#1a1a1a",
     "bannerImageUrl": "https://i.imgur.com/UCyTT7i.png",
     "backgroundImageUrl": "https://i.imgur.com/I3d2mLG.png",
     "endingTextColor": "#000000",
@@ -780,7 +780,7 @@ document.getElementById("header").src = "https://i.imgur.com/UCyTT7i.png";
 
 document.body.background = "https://i.imgur.com/I3d2mLG.png";
 
-document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#1c2527!important;}</style>";
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#1a1a1a!important;}</style>";
 
 
 //#endcode
