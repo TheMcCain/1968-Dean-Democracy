@@ -739,9 +739,11 @@ credits = function() {
         popOutMenu.id = 'popOutMenu';
         popOutMenu.style.position = 'absolute';
         popOutMenu.style.width = '440px';
+        popOutMenu.style.maxHeight = '600px'; // constrain height
+        popOutMenu.style.height = 'auto';
         popOutMenu.style.padding = '18px';
-        popOutMenu.style.backgroundColor = 'rgba(30, 30, 30, 0.95)';
-        popOutMenu.style.boxShadow = '0 0 15px rgba(0, 0, 0, 0.6)';
+        popOutMenu.style.backgroundColor = 'rgba(30,30,30,0.95)';
+        popOutMenu.style.boxShadow = '0 0 15px rgba(0,0,0,0.6)';
         popOutMenu.style.border = '1px solid #555';
         popOutMenu.style.zIndex = '1000';
         popOutMenu.style.backgroundImage = 'url("https://i.imgur.com/3Hb5hJj.png")';
@@ -749,198 +751,96 @@ credits = function() {
         popOutMenu.style.backgroundPosition = 'center';
         popOutMenu.style.borderRadius = '6px';
         popOutMenu.style.color = '#d3d3d3';
-        popOutMenu.style.maxHeight = '600px';  // Keep popup compact
-        popOutMenu.style.overflowY = 'auto';   // Scroll whole popup
+        popOutMenu.style.overflowY = 'auto'; // enable scrollbar
+        popOutMenu.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        popOutMenu.style.opacity = '0';
+        popOutMenu.style.transform = 'scale(0.9)';
 
-        // ---- Title ----
+        // Fade-in animation
+        setTimeout(() => {
+            popOutMenu.style.opacity = '1';
+            popOutMenu.style.transform = 'scale(1)';
+        }, 10);
+
+        // --- Title ---
         const menuTitle = document.createElement('h1');
-        menuTitle.innerText = 'Credits';
+        menuTitle.innerText = 'File';
         menuTitle.style.textAlign = 'center';
         menuTitle.style.fontFamily = '"Segoe UI", Tahoma, Geneva, sans-serif';
         menuTitle.style.color = '#d3d3d3';
-        menuTitle.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.7)';
+        menuTitle.style.textShadow = '2px 2px 4px rgba(0,0,0,0.7)';
         menuTitle.style.margin = '0 0 10px 0';
         menuTitle.style.fontSize = '26px';
         popOutMenu.appendChild(menuTitle);
 
-        // ---- Codefront ----
-        const pests = document.createElement('h2');
-        pests.innerText = 'Codefront';
-        pests.style.fontFamily = '"Segoe UI", Tahoma, Geneva, sans-serif';
-        pests.style.color = '#e0e0e0';
-        pests.style.textShadow = '1px 1px 3px rgba(0,0,0,0.8)';
-        pests.style.fontSize = '22px';
-        pests.style.textAlign = 'right';
-        pests.style.margin = '4px 0';
-        popOutMenu.appendChild(pests);
-        
-        const pestssubtxt = document.createElement('h3');
-        pestssubtxt.innerText = 'Those who did the coding for this project.';
-        pestssubtxt.style.fontFamily = '"Segoe UI", Tahoma, Geneva, sans-serif';
-        pestssubtxt.style.color = '#bdbdbd';
-        pestssubtxt.style.fontSize = '14px';
-        pestssubtxt.style.textAlign = 'right';
-        pestssubtxt.style.margin = '0 0 8px 0';
-        popOutMenu.appendChild(pestssubtxt);
+        // Helper function to create sections
+        function createSection(titleText, subText, listData, align='left') {
+            const title = document.createElement('h2');
+            title.innerText = titleText;
+            title.style.fontFamily = '"Segoe UI", Tahoma, Geneva, sans-serif';
+            title.style.color = '#e0e0e0';
+            title.style.textShadow = '1px 1px 3px rgba(0,0,0,0.8)';
+            title.style.fontSize = '22px';
+            title.style.textAlign = align;
+            title.style.margin = '12px 0 4px 0';
+            popOutMenu.appendChild(title);
 
-        const menuListA = document.createElement('ul');
-        menuListA.style.listStyle = 'none';
-        menuListA.style.padding = '0';
+            const sub = document.createElement('h3');
+            sub.innerText = subText;
+            sub.style.fontFamily = '"Segoe UI", Tahoma, Geneva, sans-serif';
+            sub.style.color = '#bdbdbd';
+            sub.style.fontSize = '14px';
+            sub.style.textAlign = align;
+            sub.style.margin = '0 0 8px 0';
+            popOutMenu.appendChild(sub);
 
-        creditListA.forEach(item => {
-            const menuItem = document.createElement('div');
-            menuItem.style.background = 'linear-gradient(rgba(60, 60, 60, 0.9), rgba(40, 40, 40, 0.7))';
-            menuItem.style.display = 'flex';
-            menuItem.style.alignItems = 'flex-start';
-            menuItem.style.marginBottom = '10px';
-            menuItem.style.padding = '6px';            
-            menuItem.style.borderRadius = '5px';     
-            menuItem.style.border = '1px solid #444';
+            const list = document.createElement('ul');
+            list.style.listStyle = 'none';
+            list.style.padding = '0';
 
-            const photo = document.createElement('img');
-            photo.src = item.photo;
-            photo.style.border = "1px solid #888"; 
-            photo.style.padding = "2px"; 
-            photo.style.width = '90px';
-            photo.style.height = '90px';
-            photo.style.marginRight = '10px';
-            photo.style.borderRadius = '4px';
+            listData.forEach(item => {
+                const menuItem = document.createElement('div');
+                menuItem.style.background = 'linear-gradient(rgba(60,60,60,0.9), rgba(40,40,40,0.7))';
+                menuItem.style.display = 'flex';
+                menuItem.style.alignItems = 'flex-start';
+                menuItem.style.marginBottom = '10px';
+                menuItem.style.padding = '6px';
+                menuItem.style.borderRadius = '5px';
+                menuItem.style.border = '1px solid #444';
 
-            const textAndButton = document.createElement('div');
+                const photo = document.createElement('img');
+                photo.src = item.photo;
+                photo.style.border = "1px solid #888";
+                photo.style.padding = "2px";
+                photo.style.width = '90px';
+                photo.style.height = '90px';
+                photo.style.marginRight = '10px';
+                photo.style.borderRadius = '4px';
 
-            const text = document.createElement('p');
-            text.style.fontSize = "13px"; 
-            text.innerHTML = item.text; 
-            text.style.margin = '0';
-            text.style.color = '#d3d3d3';
+                const text = document.createElement('p');
+                text.innerHTML = item.text;
+                text.style.fontSize = "13px";
+                text.style.margin = '0';
+                text.style.color = '#d3d3d3';
 
-            textAndButton.appendChild(text);
-            menuItem.appendChild(photo);
-            menuItem.appendChild(textAndButton);
+                const textAndButton = document.createElement('div');
+                textAndButton.appendChild(text);
 
-            menuListA.appendChild(menuItem);
-        });
-        popOutMenu.appendChild(menuListA);
+                menuItem.appendChild(photo);
+                menuItem.appendChild(textAndButton);
 
-        // ---- Writingfront ----
-        const enemies = document.createElement('h2');
-        enemies.innerText = 'Writingfront';
-        enemies.style.fontFamily = '"Segoe UI", Tahoma, Geneva, sans-serif';
-        enemies.style.color = '#e0e0e0';
-        enemies.style.textShadow = '1px 1px 3px rgba(0,0,0,0.8)';
-        enemies.style.fontSize = '22px';
-        enemies.style.textAlign = 'left';
-        enemies.style.margin = '12px 0 4px 0';
-        popOutMenu.appendChild(enemies);
+                list.appendChild(menuItem);
+            });
 
-        const enemiessubtxt = document.createElement('h3');
-        enemiessubtxt.innerText = 'Those who wrote for this project.';
-        enemiessubtxt.style.fontFamily = '"Segoe UI", Tahoma, Geneva, sans-serif';
-        enemiessubtxt.style.color = '#bdbdbd';
-        enemiessubtxt.style.fontSize = '14px';
-        enemiessubtxt.style.textAlign = 'left';
-        enemiessubtxt.style.margin = '0 0 8px 0';
-        popOutMenu.appendChild(enemiessubtxt);
-        
-        const menuListB = document.createElement('ul');
-        menuListB.style.listStyle = 'none';
-        menuListB.style.padding = '0';
+            popOutMenu.appendChild(list);
+        }
 
-        creditListB.forEach(item => {
-            const menuItem = document.createElement('div');
-            menuItem.style.background = 'linear-gradient(rgba(60, 60, 60, 0.9), rgba(40, 40, 40, 0.7))';
-            menuItem.style.display = 'flex';
-            menuItem.style.alignItems = 'flex-start';
-            menuItem.style.marginBottom = '10px';
-            menuItem.style.padding = '6px';            
-            menuItem.style.borderRadius = '5px';     
-            menuItem.style.border = '1px solid #444';
+        // --- Sections ---
+        createSection('Codefront','Those who did the coding for this project.', creditListA, 'right');
+        createSection('Writingfront','Those who wrote for this project.', creditListB, 'left');
+        createSection('Special Thanks','Acknowledgments and appreciation.', creditListC, 'center');
 
-            const photo = document.createElement('img');
-            photo.src = item.photo;
-            photo.style.border = "1px solid #888"; 
-            photo.style.padding = "2px"; 
-            photo.style.width = '90px';
-            photo.style.height = '90px';
-            photo.style.marginRight = '10px';
-            photo.style.borderRadius = '4px';
-
-            const textAndButton = document.createElement('div');
-
-            const text = document.createElement('p');
-            text.style.fontSize = "13px"; 
-            text.innerHTML = item.text; 
-            text.style.margin = '0';
-            text.style.color = '#d3d3d3';
-
-            textAndButton.appendChild(text);
-            menuItem.appendChild(photo);
-            menuItem.appendChild(textAndButton);
-
-            menuListB.appendChild(menuItem);
-        });
-        popOutMenu.appendChild(menuListB); 
-
-        // ---- Special Thanks ----
-        const thanks = document.createElement('h2');
-        thanks.innerText = 'Special Thanks';
-        thanks.style.fontFamily = '"Segoe UI", Tahoma, Geneva, sans-serif';
-        thanks.style.color = '#e0e0e0';
-        thanks.style.textShadow = '1px 1px 3px rgba(0,0,0,0.8)';
-        thanks.style.fontSize = '22px';
-        thanks.style.textAlign = 'center';
-        thanks.style.margin = '12px 0 4px 0';
-        popOutMenu.appendChild(thanks);
-
-        const thankssubtxt = document.createElement('h3');
-        thankssubtxt.innerText = 'Acknowledgments and appreciation.';
-        thankssubtxt.style.fontFamily = '"Segoe UI", Tahoma, Geneva, sans-serif';
-        thankssubtxt.style.color = '#bdbdbd';
-        thankssubtxt.style.fontSize = '14px';
-        thankssubtxt.style.textAlign = 'center';
-        thankssubtxt.style.margin = '0 0 8px 0';
-        popOutMenu.appendChild(thankssubtxt);
-
-        const menuListC = document.createElement('ul');
-        menuListC.style.listStyle = 'none';
-        menuListC.style.padding = '0';
-
-        creditListC.forEach(item => {
-            const menuItem = document.createElement('div');
-            menuItem.style.background = 'linear-gradient(rgba(60, 60, 60, 0.9), rgba(40, 40, 40, 0.7))';
-            menuItem.style.display = 'flex';
-            menuItem.style.alignItems = 'flex-start';
-            menuItem.style.marginBottom = '10px';
-            menuItem.style.padding = '6px';            
-            menuItem.style.borderRadius = '5px';     
-            menuItem.style.border = '1px solid #444';
-
-            const photo = document.createElement('img');
-            photo.src = item.photo;
-            photo.style.border = "1px solid #888"; 
-            photo.style.padding = "2px"; 
-            photo.style.width = '90px';
-            photo.style.height = '90px';
-            photo.style.marginRight = '10px';
-            photo.style.borderRadius = '4px';
-
-            const textAndButton = document.createElement('div');
-
-            const text = document.createElement('p');
-            text.style.fontSize = "13px"; 
-            text.innerHTML = item.text; 
-            text.style.margin = '0';
-            text.style.color = '#d3d3d3';
-
-            textAndButton.appendChild(text);
-            menuItem.appendChild(photo);
-            menuItem.appendChild(textAndButton);
-
-            menuListC.appendChild(menuItem);
-        });
-        popOutMenu.appendChild(menuListC);        
-
-        // ---- Close button ----
+        // --- Close button ---
         const closeButton = document.createElement('button');
         closeButton.innerText = 'Close';
         closeButton.onclick = closeCredits;
@@ -956,76 +856,67 @@ credits = function() {
         popOutMenu.appendChild(closeButton);
 
         document.body.appendChild(popOutMenu);
-
         makeDraggable(popOutMenu);
-    } 
-
-    if (savedX !== null && savedY !== null) {
-        popOutMenu.style.left = savedX + 'px';
-        popOutMenu.style.top = savedY + 'px';
     }
-    else {
+
+    if(savedX!==null && savedY!==null){
+        popOutMenu.style.left = savedX+'px';
+        popOutMenu.style.top = savedY+'px';
+    } else {
         const buttonRect = event.target.getBoundingClientRect();
         popOutMenu.style.left = buttonRect.right + 382 + 'px';
         popOutMenu.style.top = buttonRect.top - 406 + 'px';
-        savedX = popOutMenu.getBoundingClientRect().left;
-        savedY = popOutMenu.getBoundingClientRect().top;
+        savedX = parseInt(popOutMenu.style.left,10);
+        savedY = parseInt(popOutMenu.style.top,10);
     }
 
     popOutMenu.style.display = 'block';
 }
 
-function closeCredits() {
+function closeCredits(){
     const popOutMenu = document.getElementById('popOutMenu');
-    if (popOutMenu) {
-        savedX = popOutMenu.getBoundingClientRect().left;
-        savedY = popOutMenu.getBoundingClientRect().top;
-        popOutMenu.remove();
+    if(popOutMenu){
+        popOutMenu.style.opacity = '0';
+        popOutMenu.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+            savedX = parseInt(popOutMenu.style.left,10);
+            savedY = parseInt(popOutMenu.style.top,10);
+            popOutMenu.remove();
+        }, 300);
     }
 }
 
-function makeDraggable(element) {
-    let isDragging = false;
-    let offsetX = 0;
-    let offsetY = 0;
+function makeDraggable(element){
+    let isDragging=false;
+    let offsetX=0;
+    let offsetY=0;
 
-    element.addEventListener('mousedown', function(event) {
-        isDragging = true;
+    element.addEventListener('mousedown',function(event){
+        isDragging=true;
         event.preventDefault();
+        offsetX = event.clientX - parseInt(element.style.left || 0,10);
+        offsetY = event.clientY - parseInt(element.style.top || 0,10);
 
-        // Use current CSS left/top or default to 0
-        const rectLeft = parseInt(element.style.left || '0', 10);
-        const rectTop = parseInt(element.style.top || '0', 10);
-
-        // Calculate offset between mouse position and popup's top-left
-        offsetX = event.clientX - rectLeft;
-        offsetY = event.clientY - rectTop;
-
-        function onMouseMove(e) {
-            if (!isDragging) return;
-
+        function onMouseMove(e){
+            if(!isDragging) return;
             const newX = e.clientX - offsetX;
             const newY = e.clientY - offsetY;
-
-            element.style.left = newX + 'px';
-            element.style.top = newY + 'px';
-
-            // Save current position
-            savedX = newX;
-            savedY = newY;
+            element.style.left = newX+'px';
+            element.style.top = newY+'px';
+            savedX=newX;
+            savedY=newY;
         }
 
-        function onMouseUp() {
-            isDragging = false;
-            document.removeEventListener('mousemove', onMouseMove);
-            document.removeEventListener('mouseup', onMouseUp);
+        function onMouseUp(){
+            isDragging=false;
+            document.removeEventListener('mousemove',onMouseMove);
+            document.removeEventListener('mouseup',onMouseUp);
         }
 
-        document.addEventListener('mousemove', onMouseMove);
-        document.addEventListener('mouseup', onMouseUp);
+        document.addEventListener('mousemove',onMouseMove);
+        document.addEventListener('mouseup',onMouseUp);
     });
 }
-
 
 
 const creditListA = [ 
