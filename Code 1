@@ -345,7 +345,7 @@ campaignTrail_temp.candidate_json = [
             "party": "Democrat",
             "state": "Indiana",
             "priority": 2,
-            "description": "<p>Dean shows unwavering dedication and enthusiasm, but to secure the delegates required to win the Democratic primary of 1968, he would first need the support of fellow Democrats such as Robert F. Kennedy and Hubert H. Humphrey. The question remains: could his older sister step in to help run his campaign, or will it falter without broader backing? One way or another, time will tell whether his bid is destined to succeed or if it’s all over for him.</p>",
+            "description": "<p>Once thought of as anything but a politician, James Dean shocked the nation this year with a bold move: he is finally stepping into the political arena after a celebrated career on the stage and screen. But what exactly does he intend to do? Perhaps even run for President. For the first time in his lifetime, America felt energized, standing tall and asking itself: Do we place our faith in someone untouched by politics, or do we embrace the promise of someone new?</p><p>Yet opposition rose quickly. The so-called Anti-Dean Association soon revealed itself as a villain in the public eye, resorting to sabotage, even cutting power lines below Tennessee in an effort to disrupt the campaign’s message.</p><p>For now, though, the nation waits…</p>",
             "color_hex": "#010219",
             "secondary_color_hex": "#010219",
             "is_active": 1,
@@ -368,7 +368,7 @@ campaignTrail_temp.candidate_json = [
             "party": "American Independent",
             "state": "Alabama",
             "priority": 3,
-            "description": "<p>Why are more and more millions of Americans turning to Governor Wallace? The reason can be summed up into two words: fear & hate. Across the former Confederacy, racists fearful of integration listen to the man that proclaimed segregation shall stay in southern ground forever. Due to this, George knows damn well he ain't winning this election unless  divine intervention strikes down both parties.</p><p>No, the governor is in this race to send them a message–the Southern people shall not be trampled by northern, liberal, minority interests. Whether by through appealing to States' Rights advocates, blue-collar workers, hawks, or the common folk, Wallace hopes to deadlock the election and to force concessions from either candidate. America is on the eve of either peace or destruction, of love and war. And it all depends on this man from Alabam.</p>",
+            "description": "<p>Governor Wallace's campaign can be summed up into two words: fear & hate. Across the former Confederacy, racists fearful of integration listen to the man that proclaimed segregation shall stay in southern ground forever. Due to this, George knows damn well he ain't winning this election unless if divine intervention strikes down both parties.</p><p>No, the governor is in this race to send them a message–the Southern people shall not be trampled by northern, liberal, minority interests. Whether by through appealing to States' Rights advocates, blue-collar workers, hawks, or the common folk, Wallace hopes to deadlock the election and to force concessions from either candidate. America is on the eve of either peace or destruction, of love and war. And it all depends on this man from Alabama.</p>",
             "color_hex": "#764423",
             "secondary_color_hex": "#966827",
             "is_active": 1,
@@ -491,7 +491,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "n/a",
             "electoral_loss_message": "n/a",
             "no_electoral_majority_message": "n/a",
-            "description_as_running_mate": "<p>Muskie is a Senator from Maine, and although he has a low national profile he could help Humphrey solidify his base and carry the Northeastern states.</p><p>By going with Muskie, Humphrey would probably be writing off most of the South and also would be giving Nixon an opening among moderate voters.</p>",
+            "description_as_running_mate": "<p>Monty's appointment as James Dean’s running mate was nothing short of astonishing. A celebrated actor in his own right, Clift had built his reputation on the silver screen rather than in the halls of government, making him an unconventional but intriguing choice. Born in Nebraska, Clift’s Midwestern roots could prove valuable for Dean’s campaign, potentially swaying voters across the heartland and giving the ticket a unique balance of charisma and relatability.</p><p>But beyond geography, the real question is what Clift might contribute to Dean’s political vision. Could he use his voice to shape the cabinet, perhaps even proposing bold steps toward ending the war in Vietnam?</p>",
             "candidate_score": 0,
             "running_mate": true
         }
@@ -583,7 +583,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "n/a",
             "electoral_loss_message": "n/a",
             "no_electoral_majority_message": "n/a",
-            "description_as_running_mate": "<p>Curtis LeMay's earned his reputation as a mad bomber; the General may be the most hawkish running mate that you can pick. LeMay, a decorated war veteran and general of the 3 most recent wars America has fought in, has previously turned down your overtures for him to become your running mate. But recently, it seems that he has changed his mind on the matter.</p><p>The General brings two benefits to your candidacy: being able to appeal to potential Nixon voters and his ability to bring in financial support. However, LeMay also has two main flaws: his loose-as-hell mouth and his jingoist attitude towards Vietnam, even going so far as to advocate for nukes to be dropped. If handled poorly or not stopped, these downsides will halt most of your chances of achieving a deadlock.</p>",
+            "description_as_running_mate": "<p>A famous (some say infamous) General in the Army for many years, LeMay is dismayed by the prospect of Richard Nixon accepting nuclear parity with the Soviet Union. He also is drawn to Wallace's message of social order.</p><p>LeMay is prone to make off the cuff remarks about the use of nuclear weapons, however, which could lead to concerns about Wallace's foreign policy vision.</p>",
             "candidate_score": 0,
             "running_mate": true
         }
@@ -606,8 +606,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "n/a",
             "electoral_loss_message": "n/a",
             "no_electoral_majority_message": "n/a",
-            "description_as_running_mate": "<p>As if this race couldn't have gotten any crazier. John Wayne, the famed actor who appeared in many high-grossing movies, will shake up the race quite a bit if chosen. On the movie screen, Wayne's depicted as a valiant cowboy. On the political stage, he's viewed as a radical reactionary racist by most—in other words, a perfect VP for you. Wayne will help bring your campaign to even more national attention this fall and can help finance the Wallace war chest, which can only mean one thing: a rise in support.
-</p><p>There's a "slight" hiccup with John, however. Wayne is unwilling to join your cause; he's more willing to actively campaign for Nixon than to join a candidate like you, who has no chance of winning outright. The actor also dealt with personal scandals and obviously doesn't have any prior political experience, which can make your third-party run be seen as unserious.</p>",
+            "description_as_running_mate": "<p>A Democratic Senator from Kentucky and former Commissioner of Major League Baseball, Chandler would give Wallace's outsider campaign some credibility.</p><p>As a conservative Democrat, Chandler supports the calls for law and order and fiscal conservatism. However, he will not stand as Wallace's running mate unless he softens his rhetoric on segregation, which in turn could alienate other Southern states.</p>",
             "candidate_score": 0,
             "running_mate": true
         }
@@ -630,8 +629,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "n/a",
             "electoral_loss_message": "n/a",
             "no_electoral_majority_message": "n/a",
-            "description_as_running_mate": "<p>If you're vying to break into the West, there's no man more fit for that strategy than the former Secretary of Agriculture himself—Ezra Taft Benson. Benson, a God-fearer and staunch anti-communist, can help appeal to those groups. Like LeMay, Benson can help appeal to conservatives who supported Goldwater in '64 but are currently distrustful of Tricky Dick today. 
-</p><p>Benson seems like a reliable candidate on paper so far... but there's just a slight problem; Benson's a Mormon, and a prominent one at that. Plenty of hicks in the South—mainly White Protestants—will view him, and soon your candidacy, with distrust and ire. The LDS Church also demands you empathize your economic positions over your social ones, or else he won't be on the ticket. Nevertheless, Benson will signal a more national direction for your campaign, which if played right, can be rewarding.</p>",
+            "description_as_running_mate": "<p>The most mainline Southerner among Wallace's options, Thurmond did well in his own right when running in 1948.</p><p>Thurmond's presence could help tilt the Carolinas in Wallace's direction, but it will take every ounce of Wallace's persuasive acumen to get Thurmond to agree to run.</p>",
             "candidate_score": 0,
             "running_mate": true
         }
