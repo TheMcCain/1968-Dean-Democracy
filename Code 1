@@ -368,7 +368,7 @@ campaignTrail_temp.candidate_json = [
             "party": "American Independent",
             "state": "Alabama",
             "priority": 3,
-            "description": "<p>George Wallace runs with a singular goal in mind -- preventing an electoral college majority, and then using his role as kingmaker to broker an end to desegregation.</p><p>If Wallace comes even close to achieving this, he will have cemented his reputation as one of the great villains of American political history -- or as a true hero in certain, narrow quarters.</p><p>Wallace will simply try to carry as many Southern states as he can to increase the odds of a deadlock.</p>",
+            "description": "<p>Why are more and more millions of Americans turning to Governor Wallace? The reason can be summed up into two words: fear & hate. Across the former Confederacy, racists fearful of integration listen to the man that proclaimed segregation shall stay in southern ground forever. Due to this, George knows damn well he ain't winning this election unless  divine intervention strikes down both parties.</p><p>No, the governor is in this race to send them a message–the Southern people shall not be trampled by northern, liberal, minority interests. Whether by through appealing to States' Rights advocates, blue-collar workers, hawks, or the common folk, Wallace hopes to deadlock the election and to force concessions from either candidate. America is on the eve of either peace or destruction, of love and war. And it all depends on this man from Alabam.</p>",
             "color_hex": "#764423",
             "secondary_color_hex": "#966827",
             "is_active": 1,
@@ -583,7 +583,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "n/a",
             "electoral_loss_message": "n/a",
             "no_electoral_majority_message": "n/a",
-            "description_as_running_mate": "<p>A famous (some say infamous) General in the Army for many years, LeMay is dismayed by the prospect of Richard Nixon accepting nuclear parity with the Soviet Union. He also is drawn to Wallace's message of social order.</p><p>LeMay is prone to make off the cuff remarks about the use of nuclear weapons, however, which could lead to concerns about Wallace's foreign policy vision.</p>",
+            "description_as_running_mate": "<p>Curtis "Bombs Away" LeMay's nickname fits him very well; the General may be the most hawkish running mate that you can pick. LeMay, a decorated war veteran and general of the 3 most recent wars America has fought in, has previously turned down your overtures for him to become your running mate. But recently, it seems that he has changed his mind on the matter.</p><p>The General brings two benefits to your candidacy: being able to appeal to potential Nixon voters and his ability to bring in financial support. However, LeMay also has two main flaws: his loose-as-hell mouth and his jingoist attitude towards Vietnam, even going so far as to advocate for nukes to be dropped. If handled poorly or not stopped, these downsides will halt most of your chances of achieving a deadlock.</p>",
             "candidate_score": 0,
             "running_mate": true
         }
@@ -606,7 +606,9 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "n/a",
             "electoral_loss_message": "n/a",
             "no_electoral_majority_message": "n/a",
-            "description_as_running_mate": "<p>A Democratic Senator from Kentucky and former Commissioner of Major League Baseball, Chandler would give Wallace's outsider campaign some credibility.</p><p>As a conservative Democrat, Chandler supports the calls for law and order and fiscal conservatism. However, he will not stand as Wallace's running mate unless he softens his rhetoric on segregation, which in turn could alienate other Southern states.</p>",
+            "description_as_running_mate": "<p>As if this race couldn't have gotten any crazier. John Wayne, the famed actor who appeared in many high-grossing movies, will shake up the race quite a bit if chosen. On the movie screen, Wayne's depicted as a valiant cowboy. On the political stage, he's viewed as a radical reactionary racist by most—in other words, a perfect VP for you. Wayne will help bring your campaign to even more national attention this fall and can help finance the Wallace war chest, which can only mean one thing: a rise in support.
+</p><p>There's a "slight" hiccup with John, however. Wayne is unwilling to join your cause; he's more willing to actively campaign for Nixon than to join a candidate like you, who has no chance of winning outright. The actor also dealt with personal scandals and obviously doesn't have any prior political experience, which can make your third-party run be seen as unserious.
+</p>",
             "candidate_score": 0,
             "running_mate": true
         }
@@ -629,7 +631,9 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "n/a",
             "electoral_loss_message": "n/a",
             "no_electoral_majority_message": "n/a",
-            "description_as_running_mate": "<p>The most mainline Southerner among Wallace's options, Thurmond did well in his own right when running in 1948.</p><p>Thurmond's presence could help tilt the Carolinas in Wallace's direction, but it will take every ounce of Wallace's persuasive acumen to get Thurmond to agree to run.</p>",
+            "description_as_running_mate": "<p>If you're vying to break into the West, there's no man more fit for that strategy than the former Secretary of Agriculture himself—Ezra Taft Benson. Benson, a God-fearer and staunch anti-communist, can help appeal to those groups. Like LeMay, Benson can help appeal to conservatives who supported Goldwater in '64 but are currently distrustful of Tricky Dick today. 
+</p><p>Benson seems like a reliable candidate on paper so far... but there's just a slight problem; Benson's a Mormon, and a prominent one at that. Plenty of hicks in the South—mainly White Protestants—will view him, and soon your candidacy, with distrust and ire. The LDS Church also demands you empathize your economic positions over your social ones, or else he won't be on the ticket. Nevertheless, Benson will signal a more national direction for your campaign, which if played right, can be rewarding.
+</p>",
             "candidate_score": 0,
             "running_mate": true
         }
