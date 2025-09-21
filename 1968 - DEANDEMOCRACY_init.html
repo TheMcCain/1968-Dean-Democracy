@@ -986,31 +986,46 @@ function closeCredits() {
 
 function makeDraggable(element) {
     let isDragging = false;
-    let offsetX, offsetY;
+    let offsetX = 0;
+    let offsetY = 0;
 
-    element.onmousedown = function(event) {
+    element.addEventListener('mousedown', function(event) {
         isDragging = true;
-        offsetX = event.clientX - element.getBoundingClientRect().left;
-        offsetY = event.clientY - element.getBoundingClientRect().top;
+        event.preventDefault();
 
-        document.onmousemove = function(event) {
-            if (isDragging) {
-                const newX = event.clientX - offsetX;
-                const newY = event.clientY - offsetY;
-                element.style.left = newX + 'px';
-                element.style.top = newY + 'px';
-                savedX = newX;
-                savedY = newY;
-            }
-        };
+        // Use current CSS left/top or default to 0
+        const rectLeft = parseInt(element.style.left || '0', 10);
+        const rectTop = parseInt(element.style.top || '0', 10);
 
-        document.onmouseup = function() {
+        // Calculate offset between mouse position and popup's top-left
+        offsetX = event.clientX - rectLeft;
+        offsetY = event.clientY - rectTop;
+
+        function onMouseMove(e) {
+            if (!isDragging) return;
+
+            const newX = e.clientX - offsetX;
+            const newY = e.clientY - offsetY;
+
+            element.style.left = newX + 'px';
+            element.style.top = newY + 'px';
+
+            // Save current position
+            savedX = newX;
+            savedY = newY;
+        }
+
+        function onMouseUp() {
             isDragging = false;
-            document.onmousemove = null;
-            document.onmouseup = null;
-        };
-    };
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+        }
+
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+    });
 }
+
 
 
 const creditListA = [ 
