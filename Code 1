@@ -607,8 +607,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_loss_message": "n/a",
             "no_electoral_majority_message": "n/a",
             "description_as_running_mate": "<p>As if this race couldn't have gotten any crazier. John Wayne, the famed actor who appeared in many high-grossing movies, will shake up the race quite a bit if chosen. On the movie screen, Wayne's depicted as a valiant cowboy. On the political stage, he's viewed as a radical reactionary racist by most—in other words, a perfect VP for you. Wayne will help bring your campaign to even more national attention this fall and can help finance the Wallace war chest, which can only mean one thing: a rise in support.
-</p><p>There's a "slight" hiccup with John, however. Wayne is unwilling to join your cause; he's more willing to actively campaign for Nixon than to join a candidate like you, who has no chance of winning outright. The actor also dealt with personal scandals and obviously doesn't have any prior political experience, which can make your third-party run be seen as unserious.
-</p>",
+</p><p>There's a "slight" hiccup with John, however. Wayne is unwilling to join your cause; he's more willing to actively campaign for Nixon than to join a candidate like you, who has no chance of winning outright. The actor also dealt with personal scandals and obviously doesn't have any prior political experience, which can make your third-party run be seen as unserious.</p>",
             "candidate_score": 0,
             "running_mate": true
         }
@@ -632,8 +631,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_loss_message": "n/a",
             "no_electoral_majority_message": "n/a",
             "description_as_running_mate": "<p>If you're vying to break into the West, there's no man more fit for that strategy than the former Secretary of Agriculture himself—Ezra Taft Benson. Benson, a God-fearer and staunch anti-communist, can help appeal to those groups. Like LeMay, Benson can help appeal to conservatives who supported Goldwater in '64 but are currently distrustful of Tricky Dick today. 
-</p><p>Benson seems like a reliable candidate on paper so far... but there's just a slight problem; Benson's a Mormon, and a prominent one at that. Plenty of hicks in the South—mainly White Protestants—will view him, and soon your candidacy, with distrust and ire. The LDS Church also demands you empathize your economic positions over your social ones, or else he won't be on the ticket. Nevertheless, Benson will signal a more national direction for your campaign, which if played right, can be rewarding.
-</p>",
+</p><p>Benson seems like a reliable candidate on paper so far... but there's just a slight problem; Benson's a Mormon, and a prominent one at that. Plenty of hicks in the South—mainly White Protestants—will view him, and soon your candidacy, with distrust and ire. The LDS Church also demands you empathize your economic positions over your social ones, or else he won't be on the ticket. Nevertheless, Benson will signal a more national direction for your campaign, which if played right, can be rewarding.</p>",
             "candidate_score": 0,
             "running_mate": true
         }
