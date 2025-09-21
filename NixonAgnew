@@ -8549,8 +8549,8 @@ campaignTrail_temp.answer_feedback_json = [
     }
 ]
 
-campaignTrail_temp.candidate_image_url = "https://i.imgur.com/YFoLPBF.png";
-campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/nRNbu5n.png";
+campaignTrail_temp.candidate_image_url = "https://i.imgur.com/fCE2CYE.png";
+campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/FP8VVkv.png";
 campaignTrail_temp.candidate_last_name = "Nixon";
 campaignTrail_temp.running_mate_last_name = "Agnew";
 
