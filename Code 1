@@ -897,7 +897,7 @@ e.creditsPage = () => {
 <h2>Writing</h2>
 <p>StrawberryMaster</p>
 <p>4N3URY5M</p>
-<p>C0SM0</p>
+<p><font color='#663ca6'>C0SM0</font></p> <!-- custom -->
 <p>Viva</p>
 <h2>Special Thanks</h2>
 <p>Monument Mythos - Original Idea</p>
