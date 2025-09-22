@@ -7784,6 +7784,7 @@ campaignTrail_temp.candidate_image_url = "https://i.imgur.com/LopVVuR.png";
 campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/nveV6m1.png";
 campaignTrail_temp.candidate_last_name = "Wallace";
 campaignTrail_temp.running_mate_last_name = "LeMay";
+campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://i.imgur.com/82HWTw3.gif";
 
 
 
