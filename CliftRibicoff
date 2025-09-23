@@ -7938,7 +7938,7 @@ campaignTrail_temp.answer_feedback_json = [
     }
 ]
 
-campaignTrail_temp.candidate_image_url = "https://i.imgur.com/tfWcgVL.png";
+campaignTrail_temp.candidate_image_url = "https://i.imgur.com/uD5EA0e.png";
 campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/IDnl2hu.png";
 campaignTrail_temp.candidate_last_name = "Clift";
 campaignTrail_temp.running_mate_last_name = "Ribicoff";
@@ -7955,7 +7955,7 @@ campaignTrail_temp.jet_data = [{
     "banner_data": {
         "canName": "Clift",
         "runName": "Ribicoff",
-        "canImage": "https://i.imgur.com/tfWcgVL.png",
+        "canImage": "https://i.imgur.com/uD5EA0e.png",
         "runImage": "https://i.imgur.com/IDnl2hu.png"
     }
 }
