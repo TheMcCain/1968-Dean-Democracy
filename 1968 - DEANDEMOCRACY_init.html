@@ -311,6 +311,12 @@ campaignTrail_temp.election_json = [
     }
 ]
 
+document.getElementById("inner_window_1").children[1].innerHTML = `<li>Welcome to DEANDEMOCRACY.</li><li>An Alternate History where James Dean was elected the 37th President of the United States.</li><li>You will answer questions about his stances, handling and campaign strategy, occurring the campaign year 1968.</li><li>The answers will affect his popularity, both nationally and in individual states and can affect his relations with the Anti-Dean Association.</li><li>These policies both their success and ideology will effect the candidate you face in the 1968 election of horrors and mischiefs'.</li><li>Additionally, the game contains Choose Your Own Adventure elements, secret endings and achievements.</li><li>C'est la vie & enjoy DEANDEMOCRACY! - The DEANDEMOCRACY Team.</li>`;
+document.styleSheets[0].insertRule(".inner_window_w_desc{ margin:1em 0 0 0.5em !important;padding-top: 0.5em !important;}", 0);
+document.styleSheets[0].insertRule(".inner_window_question{ margin:1em 0 .7em 0.5em !important;padding-top: 0.3em !important;}", 0);
+document.styleSheets[0].insertRule("#main_content_area { height:82% !important;}", 0);
+
+
 campaignTrail_temp.candidate_json = [
     {
         "model": "campaign_trail.candidate",
