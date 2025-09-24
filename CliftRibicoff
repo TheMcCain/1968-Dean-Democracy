@@ -7942,7 +7942,7 @@ campaignTrail_temp.candidate_image_url = "https://i.imgur.com/uD5EA0e.png";
 campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/IDnl2hu.png";
 campaignTrail_temp.candidate_last_name = "Clift";
 campaignTrail_temp.running_mate_last_name = "Ribicoff";
-campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://i.imgur.com/4D5jLnP.gif";
+campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://i.imgur.com/VKKlU7b.gif";
 
 
 
