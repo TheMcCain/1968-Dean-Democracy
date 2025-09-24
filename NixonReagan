@@ -8553,7 +8553,7 @@ campaignTrail_temp.candidate_image_url = "https://i.imgur.com/fCE2CYE.png";
 campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/5Z7UZtD.png";
 campaignTrail_temp.candidate_last_name = "Nixon";
 campaignTrail_temp.running_mate_last_name = "Reagan";
-campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://i.imgur.com/ND9m3ZA.gif";
+campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://i.imgur.com/08Ec1O9.gif";
 
 
 
