@@ -311,12 +311,6 @@ campaignTrail_temp.election_json = [
     }
 ]
 
-document.getElementById("inner_window_1").children[1].innerHTML = `<li>Welcome to DEANDEMOCRACY.</li><li>An Alternate History where James Dean was elected the 37th President of the United States.</li><li>You will answer questions about his stances, handling and campaign strategy, occurring the campaign year 1968.</li><li>The answers will affect his popularity, both nationally and in individual states and can affect his relations with the Anti-Dean Association.</li><li>These policies both their success and ideology will effect the candidate you face in the 1968 election of horrors and mischiefs'.</li><li>Additionally, the game contains Choose Your Own Adventure elements, secret endings and achievements.</li><li>C'est la vie & enjoy DEANDEMOCRACY! - The DEANDEMOCRACY Team.</li>`;
-document.styleSheets[0].insertRule(".inner_window_w_desc{ margin:1em 0 0 0.5em !important;padding-top: 0.5em !important;}", 0);
-document.styleSheets[0].insertRule(".inner_window_question{ margin:1em 0 .7em 0.5em !important;padding-top: 0.3em !important;}", 0);
-document.styleSheets[0].insertRule("#main_content_area { height:82% !important;}", 0);
-
-
 campaignTrail_temp.candidate_json = [
     {
         "model": "campaign_trail.candidate",
@@ -842,10 +836,12 @@ credits = function() {
             popOutMenu.appendChild(list);
         }
 
+        // --- Combine credit lists A and B ---
+        const AB = [...creditListA, ...creditListB];
+
         // --- Sections ---
-        createSection('Coders','Those who did the coding for this project.', creditListA, 'right');
-        createSection('Writers','Those who wrote for this project.', creditListB, 'left');
-        createSection('Special Thanks','Acknowledgments and appreciation.', creditListC, 'center');
+        createSection('Developers','Coders and Writers', AB, 'center');
+        createSection('Special Thanks','Thanks to...', creditListC, 'center');
 
         // --- Close button ---
         const closeButton = document.createElement('button');
@@ -927,10 +923,10 @@ function makeDraggable(element){
 
 
 const creditListA = [ 
+    { photo: 'https://i.imgur.com/caIVPOx.gif', text: '<b>ElectoralUK</b><br><b>Head of Project</b><br>', button: 'Defer', id: 'ELECTORAL_A'},
     { photo: 'https://i.imgur.com/uDBJUVn.png', text: '<b>TheMcCain</b><br><b>Lead Coder</b><br>', button: 'Defer', id: 'MCCAIN_A'},
 ]
 const creditListB = [ 
-    { photo: 'https://i.imgur.com/caIVPOx.gif', text: '<b>ElectoralUK</b><br><b>Head of Project</b><br>', button: 'Defer', id: 'ELECTORAL_A'},
     { photo: 'https://i.imgur.com/FgZ0n5l.png', text: '<b>StrawberryMaster</b><br><b>General Writer + Coder</b><br>', button: 'Defer', id: 'Strawb_A'},
     { photo: 'https://i.imgur.com/3WbvK5A.png', text: '<b>USBCCable</b><br><b>Dean Writer</b><br>', button: 'Defer', id: 'USBCCABLE_A'},
     { photo: 'https://i.imgur.com/CGUIcAG.png', text: '<b>Viva</b><br><b>Nixon Writer</b><br>', button: 'Defer', id: 'VIVA_A'},
@@ -1020,13 +1016,14 @@ jet_data = {
 
 corrr = `
   <h2 style="
-    background: linear-gradient(to top, black, gray);
-    color: dark gray;
+    background: linear-gradient(to bottom, #111, #444);
+    color: darkgray;
     padding: 10px;
   ">
     DEANDEMOCRACY
   </h2>
 `;
+
 
 
 
