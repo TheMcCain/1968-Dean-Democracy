@@ -1643,7 +1643,7 @@ const VinylPlayer = {
             .progress-groove--display,
             .progress-groove--interactive {
                 position: absolute;
-                width: 100%;
+                width: 100% !important; /* so the mod CSS won't break the progressbar */
                 height: 100%;
                 margin: 0;
             }
