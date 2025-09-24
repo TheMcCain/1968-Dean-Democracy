@@ -7942,7 +7942,7 @@ campaignTrail_temp.candidate_image_url = "https://i.imgur.com/h3Ndjxk.png";
 campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/qlbfMnT.png";
 campaignTrail_temp.candidate_last_name = "Humphrey";
 campaignTrail_temp.running_mate_last_name = "Sanford";
-
+campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://i.imgur.com/VKKlU7b.gif";
 
 
 campaignTrail_temp.jet_data = [{
